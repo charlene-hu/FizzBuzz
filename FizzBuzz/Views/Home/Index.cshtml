@@ -1,0 +1,103 @@
+﻿@{
+    ViewBag.Title = "FizzBuzz";
+}
+<form id="myForm" method="post">
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8">
+            <h2>@ViewBag.Title</h2>
+            <h4>Enter a collection of integers (separated by comma), a lower number and a higher number</h4>
+        </div>
+    </div>
+    <div class="row top-buffer">
+        <div class="col-lg-2">
+            <label class="control-label">Collection</label>
+        </div>
+        <div class="col-lg-6">
+            <input type="text" name="collection" class="form-control" id="collection" placeholder="1,3,5,,15, A, 23" required = "required" />
+        </div>
+    </div>
+    <div class="row top-buffer">
+        <div class="col-lg-2">
+            <label class="control-label">Lower number (Fizz)</label>
+        </div>
+        <div class="col-lg-6">
+            <input type="number" name="lowerNumber" class="form-control" id="lowerNumber" required = "required" />
+        </div>    
+    </div>
+    <div class="row top-buffer">
+        <div class="col-lg-2">
+            <label class="control-label">Higher number (Buzz)</label>
+        </div>
+        <div class="col-lg-6">
+            <input type="number" name="higherNumber" class="form-control" id="higherNumber" required = "required" />
+        </div> 
+    </div> 
+      <div class="row">
+        <div class="col-lg-8">
+         <button type="submit" id="submit" class="btn btn-success">Fizz or Buzz?</button> 
+         <button type="reset" id="reset" class="btn btn-success">Reset</button> 
+        </div>
+    </div>
+    <div class="row"><hr />
+        <div class="col-lg-2">
+            <div id="result"></div>
+        </div>
+         <div class="col-lg-2">
+            <div id="details"></div>
+        </div>
+    </div>
+</div>
+</form>
+
+ 
+@section MyScripts
+{    
+<script type="text/javascript">
+    $('#reset').click(function() {
+        $('#result').html('');
+        $('#details').html('');
+    });
+    $(this).submit(function (event) {
+        //get form data
+        var lower =$('#lowerNumber').val();
+        var higher = $('#higherNumber').val();
+        var collection = $('#collection').val().split(',');
+        //parse collection integers
+        var output = [];
+        var result ='';
+        //process collection numbers
+        for (var i = 0; i < collection.length; i++) {
+            var data = collection[i];
+            if (isNaN(parseInt(data))) {
+                result += 'Invalid Item<br/>';
+            } else {
+                output.push('Divided ' + data + ' by ' + lower);
+                if (data % lower === 0) {
+                    output.push('Divided ' + data + ' by ' + higher);
+                    if (data % higher === 0) {
+                        result += 'FizzBuzz<br/>';
+                    } else {
+                        result += 'Fizz<br/>';
+                    }
+                } else {
+                    output.push('Divided ' + data + ' by ' + higher);
+                    if (data % higher === 0) {
+                        result += 'Buzz<br />';
+                    } else {
+                        result += 'Divided ' + data + ' by ' + lower + '<br/>';
+                        result += 'Divided ' + data + ' by ' + higher + '<br/>';
+                    }
+                }
+            }
+        }
+        var details = '';
+        for (var i = 0; i < output.length; i++) {
+            details += output[i] + '<br />';
+        }
+        $('#result').html(result);
+        $('#details').html(details);
+        event.preventDefault();
+    });
+</script>
+}
