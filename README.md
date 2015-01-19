@@ -1,6 +1,6 @@
 # FizzBuzz
 
-This application was written in asp.net MVC, C#, jQuery and Bootstrap. Since there is only one view in this application, all logic was written in jQuery in /Views/Home/Index.chtml.
+This application was written in asp.net MVC, C#, jQuery and Bootstrap. Since there is only one view in this application, all logic was written in jQuery in /Views/Home/Index.chtml and no SPA javascript libraries are used.
 
 ###Assumptions
 Item 4 in the specification "At the end of the run the program should output each division that was performed", does not seem to perfectly match the sample output. Thus, the application prints two sets of result as below. The first set matches the sample output. And the second set prints out the division operation for all divisible numbers in the collection.
